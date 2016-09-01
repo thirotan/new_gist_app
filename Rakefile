@@ -7,6 +7,7 @@ Rake::TestTask.new
 
 task default: [:test]
 
+
 # bundle exec rake test
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -21,8 +22,14 @@ namespace :db do
   desc 'Run migrations'
   task :migrate, [:version] do |_t, args|
     require 'sequel'
+    require 'yaml'
+    
+    config ||= YAML.load_file("config.yml")
+    db_config = ENV['RACK_ENV']
+    dsn = config[db_config]['dsn'] 
+
     Sequel.extension :migration
-    db = Sequel.connect(ENV.fetch('DATABASE_URL'))
+    db = Sequel.connect(dsn)
     if args[:version]
       puts "Migrating to version #{arg[:version]}"
       Sequel::Migrator.run(db, 'migrations', target: args[:version].to_i)

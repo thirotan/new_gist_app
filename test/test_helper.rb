@@ -6,8 +6,8 @@ ENV['RACK_ENV'] = 'test'
 
 config ||= YAML.load_file(File.dirname(__FILE__)+"/../config.yml")
 db_config = ENV['RACK_ENV']
-dsn = config[db_config] 
-DB = Sequel.connect(dsn['dsn'])
+dsn = config[db_config]['dsn'] 
+DB = Sequel.connect(dsn)
 
 SimpleCov.start do
   add_filter '/test/'

@@ -3,7 +3,7 @@
 # SETUP
 ```
   bundle install --path=vendor/bundle
-  DATABASE_URL=sqlte://db.sqlite bundle exec rake db:migrate
+  RACK_ENV=development bundle exec rake db:migrate
 ```
 
 # TEST
@@ -13,5 +13,5 @@
 
 # DEBUG
 ```
- ENV['RACK_ENV'] = 'development' bundle exec rackup
+ RACK_ENV=development bundle exec rackup
 ```

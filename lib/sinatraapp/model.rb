@@ -6,9 +6,9 @@ module SinatraApp
       ENV['RACK_ENV']='development' unless ENV['RACL_ENV']
       config ||= YAML.load_file(settings.root+"config.yaml")
       db_config = ENV['RACK_ENV']
-      dsn = config[db_config] 
+      dsn = config[db_config]['dsn']
       raise 'Missing db.dsn in configuration. Please set config.yml' unless dsn
-      @db ||= Sequel.connect(dsn['dsn'])
+      @db ||= Sequel.connect(dsn)
     end
   end
 end
