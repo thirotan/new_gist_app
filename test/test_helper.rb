@@ -1,11 +1,15 @@
 require 'simplecov'
-require sequel
+require 'sequel'
+require 'yaml'
 
-config ||= YAML.load_file(settings.root+"config.yaml")
+ENV['RACK_ENV'] = 'test'
+
+config ||= YAML.load_file(File.dirname(__FILE__)+"/../config.yml")
 db_config = ENV['RACK_ENV']
+
 dsn = config[db_config] 
 
-DB = Sequel.connect(dsn)
+DB = Sequel.connect(dsn['dsn'])
 
 SimpleCov.start do
   add_filter '/test/'
