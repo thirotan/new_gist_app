@@ -3,6 +3,8 @@ require 'sinatra/contrib'
 require 'erubis'
 require 'sequel'
 
+require 'sinatraapp/model'
+
 
 module SinatraApp
   class Application < Sinatra::Base
@@ -27,9 +29,11 @@ module SinatraApp
     end
 
     post '/add' do
+      erb :index
     end
 
     get '/entry/:id' do
+      erb :entry
     end
   end
 end
