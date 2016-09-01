@@ -2,7 +2,6 @@
 
 require 'rake/testtask'
 require 'rubocop/rake_task'
-require 'logger'
 
 Rake::TestTask.new
 
@@ -23,8 +22,7 @@ namespace :db do
   task :migrate, [:version] do |_t, args|
     require 'sequel'
     Sequel.extension :migration
-    logger ENV['LOGGER'] ? Logger.new(STDOUT) : nil
-    db = Sequel.connect(ENV.fetch('DATABASE_URL'), logger: logger)
+    db = Sequel.connect(ENV.fetch('DATABASE_URL'))
     if args[:version]
       puts "Migrating to version #{arg[:version]}"
       Sequel::Migrator.run(db, 'migrations', target: args[:version].to_i)

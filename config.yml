@@ -1,7 +1,0 @@
----
-production:
-  dsn: mysql://www:wwwd@localhost/gist
-development:
-  dsn: sqlite://./sqlite.db
-test:
-  dsn: sqlite://./sqlite_test.db
