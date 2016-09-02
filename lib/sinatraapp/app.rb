@@ -1,7 +1,9 @@
 require 'sinatra/base'
 require 'sinatra/contrib'
 require 'erubis'
-require 'sequel'
+
+require 'securerandom'
+require 'Time'
 
 require 'sinatraapp/model'
 
@@ -23,16 +25,29 @@ module SinatraApp
       status 404
       erb :error_404
     end
+
+    def database
+      @database ||= SinatraApp::Model.new
+    end
     
     get '/' do
       erb :index
     end
 
     post '/add_entry' do
-      erb :index
+      name = params[:name].empty? ? 'no name' : params[:name]
+      content = params[:cotent]
+
+      id = SecureRandom.hex
+      created_at = Time.now
+
+      database.db[:contents].insert(id: id, name: name, content: content, created_at: created_at)
+
+      redirect :index
     end
 
     get '/entry/:id' do
+      @entry = database.db[:contents].find(id: params[:id])
       erb :entry
     end
   end
