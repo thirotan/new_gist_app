@@ -28,7 +28,7 @@ module SinatraApp
       erb :index
     end
 
-    post '/add' do
+    post '/add_entry' do
       erb :index
     end
 
