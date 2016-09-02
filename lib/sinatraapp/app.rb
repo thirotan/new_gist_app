@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'sinatra/contrib'
 require 'erubis'
 
-require 'securerandom'
+require 'digest/sha1'
 require 'Time'
 
 require 'sinatraapp/model'
@@ -36,12 +36,12 @@ module SinatraApp
 
     post '/add_entry' do
       name = params[:name].empty? ? 'no name' : params[:name]
-      content = params[:cotent]
+      content = params[:content]
 
-      id = SecureRandom.hex
       created_at = Time.now
+      entry_id = Digest::SHA1.hexdigest("#{created_at}");
 
-      database.db[:contents].insert(id: id, name: name, content: content, created_at: created_at)
+      database.db[:contents].insert(entry_id: entry_id, name: name, content: content, created_at: created_at)
 
       redirect :index
     end
