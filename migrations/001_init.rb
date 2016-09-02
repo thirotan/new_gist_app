@@ -1,5 +1,5 @@
 Sequel.migration do
-  up do
+  change do
     create_table(:contents) do
       primary_key :id, :auto_increment=>true
       String :name, :text=>true, :null=>false
