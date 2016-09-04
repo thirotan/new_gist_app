@@ -3,7 +3,7 @@ require 'sinatra/contrib'
 require 'erubis'
 
 require 'digest/sha1'
-require 'Time'
+require 'time'
 
 require 'sinatraapp/model'
 
@@ -13,6 +13,10 @@ module SinatraApp
     configure do
       set :root, File.dirname(__FILE__) + '/../../'
       set :erb, escape_html: true
+      enable :logging
+      file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
+      file.sync = true
+      use Rack::CommonLogger, file
     end
    
     helpers do
