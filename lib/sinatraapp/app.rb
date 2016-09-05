@@ -50,8 +50,8 @@ module SinatraApp
       redirect to("/entry/#{entry_id}")
     end
 
-    get '/entry/:id' do
-      @entry = database.db[:contents].find(id: params[:id])
+    get '/entry/:entry_id' do
+      @entry = database.db[:contents].first(entry_id: params[:entry_id])
       erb :entry
     end
   end

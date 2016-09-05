@@ -1,8 +1,13 @@
-<div class="contents-title>
+<div class="contents-title">
   <div class="flex-table">
-    {@entry.title}
-    {@entry.content}
-    {@entry.name}
-    {@entry.created_at}
+    <div class="flex-table-item flex-table-item-primary">
+      <%= @entry[:description] %>
+    </div>
+    <div class="flex-table-item">
+      <%= @entry[:created_at] %>
+    </div>
   </div>
+</div>
+<div class="contents-body">
+  <%= @entry[:content] %>
 </div>
