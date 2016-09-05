@@ -52,6 +52,7 @@ module SinatraApp
 
     get '/entry/:entry_id' do
       @entry = database.db[:contents].first(entry_id: params[:entry_id])
+      error 404 unless @entry
       erb :entry
     end
   end
