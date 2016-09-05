@@ -20,7 +20,7 @@ module SinatraApp
     end
    
     helpers do
-      def h(text)
+      def h(text:)
         Rack::Utils.escape_html(text)
       end
     end

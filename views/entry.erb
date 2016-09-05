@@ -1,10 +1,10 @@
 <div class="contents-title">
   <div class="flex-table">
     <div class="flex-table-item flex-table-item-primary">
-      <%= h @entry[:description] %>
+      <%= h(text: @entry[:description]) %>
     </div>
     <div class="flex-table-item">
-      <%= h @entry[:created_at] %>
+      <%= h(text: @entry[:created_at]) %>
     </div>
   </div>
 </div>
