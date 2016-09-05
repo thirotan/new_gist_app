@@ -9,7 +9,7 @@ use Rack::Protection::XSSHeader
 use Rack::Protection::FrameOptions
 
 
-use Rack::Static, urls: ['/css'], root: File.join(File.dirname(__FILE__) + 'public') 
+use Rack::Static, urls: ['/css'], root: File.join(File.dirname(__FILE__), 'public')
 
 
 run Rack::URLMap.new(
