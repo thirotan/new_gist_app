@@ -21,7 +21,7 @@ module SinatraApp
    
     helpers do
       def h(text)
-        data = Rack::Utils.escape_html(text)
+        Rack::Utils.escape_html(text)
       end
     end
  
