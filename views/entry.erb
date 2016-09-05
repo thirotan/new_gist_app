@@ -1,13 +1,13 @@
 <div class="contents-title">
   <div class="flex-table">
     <div class="flex-table-item flex-table-item-primary">
-      <%= @entry[:description] %>
+      <%= h @entry[:description] %>
     </div>
     <div class="flex-table-item">
-      <%= @entry[:created_at] %>
+      <%= h @entry[:created_at] %>
     </div>
   </div>
 </div>
 <div class="contents-body">
-  <%= @entry[:content] %>
+  <pre class="prettyprint"><%= @entry[:content] %></pre>
 </div>
