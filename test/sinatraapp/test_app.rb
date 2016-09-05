@@ -14,7 +14,7 @@ class TestApplication < SinatraApp::Test
   def test_add
     post '/add_entry',
          'entry_id' => 'testid1',
-         'name' => 'test_user',
+         'description' => 'test paste',
          'content' => 'test post message',
          'created_at' => '2016-09-02 15:27:11 +0900'
 

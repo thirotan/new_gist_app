@@ -17,7 +17,7 @@ Rake::TestTask.new do |t|
   t.verbose = false
 end
 
-# bundle exec rake db:migrate
+# RACK_ENV={test|development|production} bundle exec rake db:migrate
 namespace :db do
   desc 'Run migrations'
   task :migrate, [:version] do |_t, args|

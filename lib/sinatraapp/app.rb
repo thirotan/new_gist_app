@@ -39,15 +39,15 @@ module SinatraApp
     end
 
     post '/add_entry' do
-      name = params[:name].empty? ? 'no name' : params[:name]
+      description = params[:description]
       content = params[:content]
 
       created_at = Time.now
       entry_id = Digest::SHA1.hexdigest("#{created_at}");
 
-      database.db[:contents].insert(entry_id: entry_id, name: name, content: content, created_at: created_at)
+      database.db[:contents].insert(entry_id: entry_id, content: content, created_at: created_at, description: description)
 
-      redirect :index
+      redirect to("/entry/#{entry_id}")
     end
 
     get '/entry/:id' do
