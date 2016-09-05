@@ -2,7 +2,7 @@ vendor
 Gemfile.lock
 .bundle
 coverage
-sql/*
+sql/*.sqlite
 config.yml
-log/*
+log/*.log
 

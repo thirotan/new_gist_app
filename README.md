@@ -11,7 +11,7 @@
  bundle exec rake test
 ``` 
 
-# DEBUG
+# startt server(develop envronment)
 ```
- RACK_ENV=development bundle exec rackup
+ RACK_ENV=development bundle exec shotgun config.ru &
 ```
