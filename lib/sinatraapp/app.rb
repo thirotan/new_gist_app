@@ -55,5 +55,13 @@ module SinatraApp
       error 404 unless @entry
       erb :entry
     end
+
+    get '/entry/:entry_id/raw' do
+      @entry = database.db[:contents].first(entry_id: params[:entry_id])
+      error 404 unless @entry
+
+      content_type 'text/plain'
+      @entry[:content]
+    end
   end
 end

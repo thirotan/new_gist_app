@@ -4,6 +4,9 @@
       <%= h(text: @entry[:description]) %>
     </div>
     <div class="flex-table-item">
+      <a href="/entry/<%= @entry[:entry_id] %>/raw">raw</a>
+    </div>
+    <div class="flex-table-item">
       <%= h(text: @entry[:created_at]) %>
     </div>
   </div>
