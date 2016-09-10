@@ -3,14 +3,12 @@
     <div class="flex-table-item flex-table-item-primary">
       <%= h(text: @entry[:description]) %>
     </div>
-    <div class="flex-table-item">
-      <a href="/entry/<%= @entry[:entry_id] %>/raw">raw</a>
-    </div>
-    <div class="flex-table-item">
-      <%= h(text: @entry[:created_at]) %>
-    </div>
   </div>
 </div>
 <div class="contents-body">
   <pre class="prettyprint"><%= @entry[:content] %></pre>
+</div>
+<div class="flex-table-item" align="right">
+    <a href="/entry/<%= @entry[:entry_id] %>/raw">raw</a>
+    <%= h(text: @entry[:created_at]) %>
 </div>
