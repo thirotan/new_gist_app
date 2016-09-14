@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require 'sinatra/contrib'
 require 'erubis'
 
-require 'digest/sha1'
-require 'time'
-
 require 'sinatraapp/model'
 
+require 'digest/sha1'
+require 'time'
 
 module SinatraApp
   class Application < Sinatra::Base
