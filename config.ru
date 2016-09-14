@@ -12,8 +12,13 @@ use Rack::Protection::FrameOptions
 
 use Rack::Static, urls: ['/css'], root: File.join(File.dirname(__FILE__), 'public')
 
+pass = SecureRandom.hex
+print "PASSWORD: #{pass}\n"
+
 
 run Rack::URLMap.new(
-  '/admin' => SinatraApp::Admin,
+  '/admin/' => Rack::Auth::Basic.new(SinatraApp::Admin) do |username, password|
+    username == 'admin' && password == pass
+  end,
   '/' => SinatraApp::Application
 )

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-require 'sintra/base'
-require 'sintra/contrib'
+require 'sinatra/base'
+require 'sinatra/contrib'
 require 'erubis'
 
 require 'sinatraapp/model'
 
 module SinatraApp
-  class Admin < Sintra::Base
+  class Admin < Sinatra::Base
     configure do
       set :root, File.dirname(__FILE__) + '/../../'
       set :erb, escape_html: true
@@ -32,6 +32,7 @@ module SinatraApp
     end
     
     get '/' do
+      'admin'
     end
   end
 end
