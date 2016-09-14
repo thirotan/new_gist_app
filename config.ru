@@ -13,7 +13,7 @@ use Rack::Protection::FrameOptions
 use Rack::Static, urls: ['/css'], root: File.join(File.dirname(__FILE__), 'public')
 
 pass = SecureRandom.hex
-print "PASSWORD: #{pass}\n"
+puts "PASSWORD: #{pass}\n"
 
 
 run Rack::URLMap.new(

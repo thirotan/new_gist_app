@@ -32,7 +32,7 @@ module SinatraApp
     end
     
     get '/' do
-      'admin'
+      erb :admin
     end
   end
 end
