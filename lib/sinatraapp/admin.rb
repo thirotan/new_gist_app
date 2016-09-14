@@ -34,5 +34,10 @@ module SinatraApp
     get '/' do
       erb :admin
     end
+
+    post '/delete/#{entry_id}'
+      entry_id = params[entry_id]
+      database.db[:contents].where(:entry_id => entry_id).delete
+    end
   end
 end
