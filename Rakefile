@@ -1,4 +1,4 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 require 'rake/testtask'
 require 'rubocop/rake_task'
@@ -6,7 +6,6 @@ require 'rubocop/rake_task'
 Rake::TestTask.new
 
 task default: [:test]
-
 
 # bundle exec rake test
 Rake::TestTask.new do |t|
@@ -23,10 +22,9 @@ namespace :db do
   task :migrate, [:version] do |_t, args|
     require 'sequel'
     require 'yaml'
-    
-    config ||= YAML.load_file("config.yml")
+    config ||= YAML.load_file('config.yml')
     db_config = ENV['RACK_ENV']
-    dsn = config[db_config]['dsn'] 
+    dsn = config[db_config]['dsn']
 
     Sequel.extension :migration
     db = Sequel.connect(dsn)
@@ -34,7 +32,7 @@ namespace :db do
       puts "Migrating to version #{arg[:version]}"
       Sequel::Migrator.run(db, 'migrations', target: args[:version].to_i)
     else
-      puts "Migrating to latest"
+      puts 'Migrating to latest'
       Sequel::Migrator.run(db, 'migrations')
     end
   end

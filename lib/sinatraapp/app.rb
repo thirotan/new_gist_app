@@ -19,14 +19,14 @@ module SinatraApp
       file.sync = true
       use Rack::CommonLogger, file
     end
-   
+
     helpers do
       def h(text:)
         Rack::Utils.escape_html(text)
       end
     end
- 
-    not_found do 
+
+    not_found do
       status 404
       erb :error_404
     end
@@ -34,7 +34,7 @@ module SinatraApp
     def database
       @database ||= SinatraApp::Model.new
     end
-    
+
     get '/' do
       erb :index
     end
@@ -44,7 +44,7 @@ module SinatraApp
       content = params[:content]
 
       created_at = Time.now
-      entry_id = Digest::SHA1.hexdigest("#{created_at}");
+      entry_id = Digest::SHA1.hexdigest(created_at.to_s)
 
       database.db[:contents].insert(entry_id: entry_id, content: content, created_at: created_at, description: description)
 
