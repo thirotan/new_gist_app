@@ -46,7 +46,7 @@ module SinatraApp
       created_at = Time.now
       entry_id = Digest::SHA1.hexdigest(created_at.to_s)
 
-      database.db[:etries].insert(entry_id: entry_id, entry: entry, created_at: created_at, description: description)
+      database.db[:entries].insert(entry_id: entry_id, entry: entry, created_at: created_at, description: description)
 
       redirect to("/entry/#{entry_id}")
     end

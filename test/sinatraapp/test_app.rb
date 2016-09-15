@@ -23,7 +23,7 @@ class TestApplication < SinatraApp::Test
   end
 
   def test_entry_page
-    entry_id = 1
+    entry_id = '8b905e5f04f30a590d5ae0f7e612aebac7b93ddf'
     get "/entry/#{entry_id}"
     assert_equal 200, last_response.status
   end
