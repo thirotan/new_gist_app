@@ -21,8 +21,8 @@ module SinatraApp
         Rack::Utils.escape_html(text)
       end
     end
- 
-    not_found do 
+
+    not_found do
       status 404
       erb :error_404
     end
@@ -30,14 +30,14 @@ module SinatraApp
     def database
       @database ||= SinatraApp::Model.new
     end
-    
+
     get '/' do
       erb :admin
     end
 
-    post '/delete/#{entry_id}'
+    post '/delete/#{entry_id}' do
       entry_id = params[entry_id]
-      database.db[:contents].where(:entry_id => entry_id).delete
+      database.db[:contents].where(entry_id: entry_id).delete
     end
   end
 end
