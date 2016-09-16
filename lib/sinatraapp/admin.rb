@@ -32,12 +32,13 @@ module SinatraApp
     end
 
     get '/' do
+      entries = database.db[:entries].all
       erb :admin
     end
 
     post '/entry/#{entry_id}' do
       entry_id = params[entry_id]
-      database.db[:contents].where(entry_id: entry_id).delete
+      database.db[:entries].where(entry_id: entry_id).delete
     end
   end
 end
