@@ -8,6 +8,10 @@ class TestApplication < SinatraApp::Test
     @app
   end
 
+  def database
+    @database
+  end
+
   def test_top
     get '/'
     assert_equal 200, last_response.status
@@ -23,8 +27,18 @@ class TestApplication < SinatraApp::Test
   end
 
   def test_entry_page
-    entry_id = '8b905e5f04f30a590d5ae0f7e612aebac7b93ddf'
+    entry = database.db[:entries].first(description: 'test paste')
+    entry_id = entry[:entry_id]
     get "/entry/#{entry_id}"
     assert_equal 200, last_response.status
+    assert last_response.body.include?('test post message')
+  end
+
+  def test_entry_raw_page
+    entry = database.db[:entries].first(description: 'test paste')
+    entry_id = entry[:entry_id]
+    get "/entry/#{entry_id}/raw"
+    assert_equal 200, last_response.status
+    assert last_response.body.include?('test post message')
   end
 end
