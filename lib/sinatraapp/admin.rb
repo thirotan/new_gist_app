@@ -32,13 +32,16 @@ module SinatraApp
     end
 
     get '/' do
-      entries = database.db[:entries].all
+      @entries = database.db[:entries].order(Sequel.desc(:created_at))
       erb :admin
     end
+    
 
-    post '/entry/#{entry_id}' do
-      entry_id = params[entry_id]
+    post '/entry/:entry_id/delete' do
+      entry_id = params[:entry_id]
       database.db[:entries].where(entry_id: entry_id).delete
+
+      redirect to("/")
     end
   end
 end

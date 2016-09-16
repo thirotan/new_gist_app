@@ -1,22 +1,32 @@
-<form action="/add_entry" method="post">
-  <dl class="form">
-    <dd>
-      <input class="input-block" id="description" name="description" type="text" style="width: 100%" placeholder="description">
-    </dd>
-  </dl>
-  <div class="contents-body">
-    <dl class="form">
-      <dd>
-        <div id="inputblock" class="">
-          <div id="inputarea" class="">
-　　　　　　<textarea autofocus="true" class="input-block" id="entry" name="entry" placeholder="message..." style="min-height: 300px; width: 100%;" type="text"></textarea>
-          </div>
-        </div>
-      <dd>
-    </dl>
-  </div>
-  <br>
-  <div class="form-actions">
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>description</th>
+        <th>created_at</th>
+        <th>delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @entries.each do |entry|  %>
+      <tr>
+        <td>
+          <a href="/entry/<%= entry[:entry_id] %>">
+            <% if entry[:description].empty? %>
+              <%= entry[:entry][0..10] %>
+            <% else %>
+              <%= entry[:description] %>
+            <% end %>
+          </a>
+        </td>
+        <td><%= entry[:created_at] %></td>
+        <td>
+          <form name="form" method="post" action="/admin/entry/<%= entry[:entry_id] %>/delete">
+            <button class="btn btn-danger">DELETE</button>
+          </form>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
