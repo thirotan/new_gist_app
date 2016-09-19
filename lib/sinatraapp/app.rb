@@ -14,6 +14,7 @@ module SinatraApp
     configure do
       set :root, File.dirname(__FILE__) + '/../../'
       set :erb, escape_html: true
+      set :public_folder, File.dirname(__FILE__) + '/../../public'
       enable :logging
       file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a+')
       file.sync = true
@@ -23,6 +24,17 @@ module SinatraApp
     helpers do
       def h(text:)
         Rack::Utils.escape_html(text)
+      end
+
+      def protected!
+        return if authorized?
+        headers['WWW-Authenticate'] = 'Basic ream="Restricted Area"'
+        halt 401, "Not Authorized\n"
+      end
+
+      def authorized?
+        @auth ||= Rack::Auth::Basic::Request.new(request.env)
+        @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == ['admin', 'admin']
       end
     end
 
@@ -63,6 +75,20 @@ module SinatraApp
 
       content_type 'text/plain'
       @entry[:entry]
+    end
+
+    get '/admin' do
+      protected!
+      @entries = database.db[:entries].order(Sequel.desc(:created_at))
+      erb :admin
+    end
+
+    post '/entry/:entry_id/delete' do
+      protected!
+      entry_id = params[:entry_id]
+      database.db[:entries].where(entry_id: entry_id).delete
+
+      redirect to("/")
     end
   end
 end
