@@ -16,3 +16,8 @@
 ```
  RACK_ENV=development bundle exec shotgun config.ru &
 ```
+
+# rubocop
+```
+bundle exec rubocop -R -D
+```

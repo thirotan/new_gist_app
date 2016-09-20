@@ -34,7 +34,7 @@ module SinatraApp
 
       def authorized?
         @auth ||= Rack::Auth::Basic::Request.new(request.env)
-        @auth.provided? and @auth.basic? and @auth.credentials and @auth.credentials == ['admin', 'admin']
+        @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'admin']
       end
     end
 
@@ -88,7 +88,7 @@ module SinatraApp
       entry_id = params[:entry_id]
       database.db[:entries].where(entry_id: entry_id).delete
 
-      redirect to("/")
+      redirect to('/')
     end
   end
 end
