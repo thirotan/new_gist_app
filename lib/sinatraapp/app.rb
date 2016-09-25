@@ -34,8 +34,13 @@ module SinatraApp
 
       def authorized?
         @auth ||= Rack::Auth::Basic::Request.new(request.env)
-        @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'admin']
+        @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [admin[:user], admin[:pass]]
       end
+    end
+
+    def admin
+      config ||= YAML.load_file(File.dirname(__FILE__) + '/../../config.yml')
+      admin ||= {user: config['admin']['user'], pass: config['admin']['pass']}
     end
 
     not_found do
