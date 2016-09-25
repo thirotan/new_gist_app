@@ -11,17 +11,17 @@
       <% @entries.each do |entry|  %>
       <tr>
         <td>
-          <a href="/entry/<%= entry[:entry_id] %>">
-            <% if entry[:description].empty? %>
-              <%= entry[:entry][0..10] %>
+          <a href="/entry/<%= entry.entry_id %>">
+            <% if entry.description.empty? %>
+              <%= entry.entry[0..10] %>
             <% else %>
-              <%= entry[:description] %>
+              <%= entry.description %>
             <% end %>
           </a>
         </td>
-        <td><%= entry[:created_at] %></td>
+        <td><%= entry.created_at %></td>
         <td>
-          <form name="form" method="post" action="/admin/entry/<%= entry[:entry_id] %>/delete">
+          <form name="form" method="post" action="/admin/entry/<%= entry.entry_id %>/delete">
             <button class="btn btn-danger">DELETE</button>
           </form>
         </td>

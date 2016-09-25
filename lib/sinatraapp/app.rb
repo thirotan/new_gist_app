@@ -54,40 +54,35 @@ module SinatraApp
     post '/add_entry' do
       description = params[:description]
       entry = params[:entry]
-
       created_at = Time.now
       entry_id = Digest::SHA1.hexdigest(created_at.to_s)
-
-      database.db[:entries].insert(entry_id: entry_id, entry: entry, created_at: created_at, description: description)
-
+      database.insert(entry_id: entry_id, description: description, entry: entry, created_at: created_at)
       redirect to("/entry/#{entry_id}")
     end
 
     get '/entry/:entry_id' do
-      @entry = database.db[:entries].first(entry_id: params[:entry_id])
+      @entry = database.find(entry_id: params[:entry_id])
       error 404 unless @entry
       erb :entry
     end
 
     get '/entry/:entry_id/raw' do
-      @entry = database.db[:entries].first(entry_id: params[:entry_id])
+      @entry = database.find(entry_id: params[:entry_id])
       error 404 unless @entry
-
       content_type 'text/plain'
-      @entry[:entry]
+      @entry.entry
     end
 
     get '/admin' do
       protected!
-      @entries = database.db[:entries].order(Sequel.desc(:created_at))
+      @entries = database.all
       erb :admin
     end
 
     post '/entry/:entry_id/delete' do
       protected!
       entry_id = params[:entry_id]
-      database.db[:entries].where(entry_id: entry_id).delete
-
+      database.delete(entry_id: entry_id)
       redirect to('/')
     end
   end
