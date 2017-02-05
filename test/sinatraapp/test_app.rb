@@ -50,6 +50,13 @@ class TestApplication < SinatraApp::Test
     assert_equal 200, last_response.status
   end
 
+  def test_create_entry
+    post '/add_entry',
+	'description' => 'test title ',
+	'entry' => 'test body'
+    assert_equal 302, last_response.status
+  end
+
   def test_delete_entry
     entry = @database.find_by_description(description: 'test paste')
     entry_id = entry.entry_id
